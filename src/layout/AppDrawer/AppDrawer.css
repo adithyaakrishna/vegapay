@@ -5,3 +5,14 @@
 .MuiSlider-root:hover {
   color: #2e8b57;
 }
+
+.MuiTypography-root{
+  color: black;
+}
+.logo{
+  height: 50px;
+}
+
+.MuiAppBar-root{
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1), 0px 4px 5px 0px rgba(0,0,0,0.01), 0px 0px 10px 0px rgba(0,0,0,0.1) !important;
+}

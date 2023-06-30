@@ -38,7 +38,12 @@ const AppBar = styled(MuiAppBar, {
 export const MenuBar = (props: IProps) => {
 
   return (
-    <AppBar position="fixed" open={props.isOpen}>
+    <AppBar position="fixed" open={props.isOpen} sx={{
+          '& .MuiToolbar-root':{
+            backgroundColor: '#FFFFFF',
+            color: 'black'
+          }
+        }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -49,9 +54,6 @@ export const MenuBar = (props: IProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
           <Box sx={{ flexGrow: 1 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={props.handleOpen} sx={{ p: 0 }}>

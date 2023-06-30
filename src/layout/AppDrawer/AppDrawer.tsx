@@ -147,24 +147,31 @@ const cardItems = [
       <Drawer
         sx={{
           width: drawerWidth,
-          flexShrink: 0,
+          flexShrink: 1,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: "#36285B"
           },
         }}
         variant="persistent"
         anchor="left"
         open={isOpen}
       >
-        <DrawerHeader>
+        <DrawerHeader sx={{
+          backgroundColor: '#36285B'
+        }}>
           <img src={vegaPayLogo} className="logo" alt="VegaPay Logo" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         {/* Management Items */}
-        <List>
+        <List sx={{
+          '& .MuiTypography-root':{
+            color: '#FFFFFF'
+          }
+        }}>
           {managementItems.map((item) => (
             <Link key={item.id} to={item.link} >
               <ListItem disablePadding>
@@ -179,7 +186,11 @@ const cardItems = [
           ))}
         </List>
         {/* Card Items */}
-        <List>
+        <List sx={{
+          '& .MuiTypography-root':{
+            color: '#FFFFFF'
+          }
+        }}>
           {cardItems.map((item) => (
             <Link key={item.id} to={item.link}>
               <ListItem disablePadding>
