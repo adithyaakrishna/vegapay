@@ -2,24 +2,18 @@ import { Button, Container, Grid, InputAdornment, MenuItem, TextField, Typograph
 import BadgeIcon from '@mui/icons-material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from 'react';
-import { KitTable } from '../../layout/KitTable/KitTable';
-import { SaleTable } from '../../layout/SaleTable/SaleTable';
-import { ReissueTable } from '../../layout/ReissueTable/ReissueTable';
+import { KitTable } from '../../layout/KitTable';
+import { SaleTable } from '../../layout/SaleTable';
+import { ReissueTable } from '../../layout/ReissueTable';
+import { reIssueData, salesData, statuses, userData } from '../../constants/Constants';
 
 export const CardSale = () => {
-  const statuses = [
-    {
-      value: 'Approve',
-      label: 'Approve'
-    },
-    {
-      value: 'Reject',
-      label: 'Reject'
-    },
-  ]
+  
   const [kit, setKit] = useState(true);
   const [sale, setSale] = useState(false);
   const [reissue, setReissue] = useState(false);
+  const [searchInput, setSearchInput] = useState()
+  const [filteredData, setFilteredData] = useState(userData);
   const handleKitChange = () => {
     setKit(true);
     setSale(false);
@@ -34,6 +28,14 @@ export const CardSale = () => {
     setKit(false);
     setSale(false);
     setReissue(true)
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSearch = (event: any) => {
+    setSearchInput(event.target.value);
+    const filtered = userData.filter((user) =>
+      user.mobileNo.includes(event.target.value) || user.cardNo.includes(event.target.value)
+    );
+    setFilteredData(filtered);
   }
   return (
     <>
@@ -89,7 +91,9 @@ export const CardSale = () => {
                         <SearchIcon />
                       </InputAdornment>
                     ),
-                  }} 
+                  }}
+                  value={searchInput}
+                  onChange={handleSearch}
                   size='medium' id="outlined-basic" placeholder="Search by Mobile or Customer ID" variant="outlined" sx={{marginRight: '25px', width: '80%'}}
                 />
               </Grid>
@@ -114,17 +118,17 @@ export const CardSale = () => {
       </Container>
       {kit && (
         <div className='table-container'>
-          <KitTable />
+          <KitTable userData={filteredData} searchKey={searchInput} />
         </div>
       )}
       {sale && (
         <div className='table-container'>
-          <SaleTable />
+          <SaleTable userData={salesData} />
         </div>
       )}
       {reissue && (
         <div className='table-container'>
-          <ReissueTable />
+          <ReissueTable userData={reIssueData}/>
         </div>
       )}
     </>

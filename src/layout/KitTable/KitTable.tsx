@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -5,8 +6,12 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
 import { CustomChip } from '../../components/CustomChip/CustomChip';
+
+interface IProps {
+    searchKey: string | undefined;
+    userData: any;
+}
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,41 +33,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const userData = [
-  {
-    name: 'Adi',
-    userID: '1331121asdsad',
-    email: 'adi@adi.com',
-    roles: 'Admin',
-    status: 'Approved',
-    action: <Button variant="contained">Send to Checker</Button>
-  }
-]
-
-export const KitTable = () => {
-  return (
+export const KitTable = (props: IProps) => {
+    return (
     <TableContainer component={Table}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">User ID</StyledTableCell>
+            <StyledTableCell>Customer Name</StyledTableCell>
+            <StyledTableCell align="right">Card No.</StyledTableCell>
             <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Alloted Roles</StyledTableCell>
-            <StyledTableCell align="right">Status</StyledTableCell>
+            <StyledTableCell align="right">Mobile No.</StyledTableCell>
+            <StyledTableCell align="right">Card Network</StyledTableCell>
             <StyledTableCell align="right">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {userData.map((users) => (
-            <StyledTableRow key={users.userID}>
+          {props.userData.map((users: any) => (
+            <StyledTableRow key={users.cardNo}>
               <StyledTableCell component="th" scope="row">
                 {users.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{users.userID}</StyledTableCell>
+              <StyledTableCell align="right">{users.cardNo}</StyledTableCell>
               <StyledTableCell align="right">{users.email}</StyledTableCell>
-              <StyledTableCell align="right"><CustomChip label={users.roles} color='info'/></StyledTableCell>
-              <StyledTableCell align="right"><CustomChip label={users.status} color={users.status === 'Approved' ? 'success' : 'error'}/></StyledTableCell>
+              <StyledTableCell align="right">{users.mobileNo}</StyledTableCell>
+              <StyledTableCell align="right"><CustomChip label={users.cardNetwork} color='default' /></StyledTableCell>
               <StyledTableCell align="right">{users.action}</StyledTableCell>
             </StyledTableRow>
           ))}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -5,8 +6,11 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
 import { CustomChip } from '../../components/CustomChip/CustomChip';
+
+interface IProps {
+    userData: any;
+}
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,42 +32,37 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const userData = [
-  {
-    name: 'Adi',
-    userID: '1331121asdsad',
-    email: 'adi@adi.com',
-    roles: 'Admin',
-    status: 'Approved',
-    action: <Button variant="contained">Send to Checker</Button>
-  }
-]
-
-export const ReissueTable = () => {
+export const ReissueTable = (props: IProps) => {
   return (
     <TableContainer component={Table}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">User ID</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Alloted Roles</StyledTableCell>
+            <StyledTableCell>Kit No.</StyledTableCell>
+            <StyledTableCell align="right">Name</StyledTableCell>
+            <StyledTableCell align="right">Program Name</StyledTableCell>
+            <StyledTableCell align="right">Customer ID</StyledTableCell>
+            <StyledTableCell align="right">Card No.</StyledTableCell>
+            <StyledTableCell align="right">Expiry Date</StyledTableCell>
+            <StyledTableCell align="right">Activation Date</StyledTableCell>
             <StyledTableCell align="right">Status</StyledTableCell>
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="right">Details</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {userData.map((users) => (
-            <StyledTableRow key={users.userID}>
+          {props.userData.map((users: any) => (
+            <StyledTableRow key={users.customerID}>
               <StyledTableCell component="th" scope="row">
-                {users.name}
+                {users.kitNo}
               </StyledTableCell>
-              <StyledTableCell align="right">{users.userID}</StyledTableCell>
-              <StyledTableCell align="right">{users.email}</StyledTableCell>
-              <StyledTableCell align="right"><CustomChip label={users.roles} color='info'/></StyledTableCell>
-              <StyledTableCell align="right"><CustomChip label={users.status} color={users.status === 'Approved' ? 'success' : 'error'}/></StyledTableCell>
-              <StyledTableCell align="right">{users.action}</StyledTableCell>
+               <StyledTableCell align="right">{users.name}</StyledTableCell>
+              <StyledTableCell align="right">{users.programName}</StyledTableCell>
+              <StyledTableCell align="right">{users.customerID}</StyledTableCell>
+              <StyledTableCell align="right">{users.cardNo}</StyledTableCell>
+              <StyledTableCell align="right">{users.expiryDate}</StyledTableCell>
+              <StyledTableCell align="right">{users.activationDate}</StyledTableCell>
+              <StyledTableCell align="right"><CustomChip label={users.status} color={users.status === 'Approved' ? 'success' : users.status === 'Pending' ? 'warning' : 'error'}/></StyledTableCell>
+              <StyledTableCell align="right">{users.details}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
