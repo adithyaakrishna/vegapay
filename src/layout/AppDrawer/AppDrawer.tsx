@@ -17,6 +17,7 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import './AppDrawer.css';
 import { MenuBar } from '../../components/MenuBar/MenuBar';
 import { Link } from 'react-router-dom';
+import { Divider } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -55,32 +56,32 @@ interface IProps {
 
 export const AppDrawer = (props: IProps) => {
   const theme = useTheme();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
   const [anchorElement, setAnchorElement] = React.useState<null | HTMLElement>(null);
 
   // Array of Management Menus
   const managementItems = [
   {
     id: 0,
-    icon: <SpaceDashboardSharpIcon />,
+    icon: <SpaceDashboardSharpIcon className="drawer-icon" />,
     link: '/',
     name: 'Team Management'
   },
   {
     id: 1,
-    icon: <SpaceDashboardSharpIcon />,
+    icon: <SpaceDashboardSharpIcon className="drawer-icon" />,
     link: '/',
     name: 'Application Management'
   },
   {
     id: 2,
-    icon: <SpaceDashboardSharpIcon />,
+    icon: <SpaceDashboardSharpIcon className="drawer-icon" />,
     link: '/',
     name: 'Corporate Management'
   },
   {
     id: 3,
-    icon: <SpaceDashboardSharpIcon />,
+    icon: <SpaceDashboardSharpIcon className="drawer-icon" />,
     link: '/',
     name: 'User Management'
   }
@@ -90,31 +91,31 @@ export const AppDrawer = (props: IProps) => {
 const cardItems = [
   {
     id: 0,
-    icon: <CreditCardOutlinedIcon />,
+    icon: <CreditCardOutlinedIcon className="drawer-icon" />,
     link: '/cardSale',
     name: 'Card Sale'
   },
   {
     id: 1,
-    icon: <CreditCardOutlinedIcon />,
+    icon: <CreditCardOutlinedIcon className="drawer-icon" />,
     link: '/cardSale',
     name: 'Card Transaction'
   },
   {
     id: 2,
-    icon: <CreditCardOutlinedIcon />,
+    icon: <CreditCardOutlinedIcon className="drawer-icon" />,
     link: '/cardSale',
     name: 'Inventory Management'
   },
   {
     id: 3,
-    icon: <CreditCardOutlinedIcon />,
+    icon: <CreditCardOutlinedIcon className="drawer-icon" />,
     link: '/cardSale',
     name: 'Release Transaction'
   },
   {
     id: 4,
-    icon: <CreditCardOutlinedIcon />,
+    icon: <CreditCardOutlinedIcon className="drawer-icon" />,
     link: '/cardSale',
     name: 'Services'
   },
@@ -163,7 +164,7 @@ const cardItems = [
         }}>
           <img src={vegaPayLogo} className="logo" alt="VegaPay Logo" />
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon className="drawer-icon" /> : <ChevronRightIcon className="drawer-icon" />}
           </IconButton>
         </DrawerHeader>
         {/* Management Items */}
@@ -204,9 +205,19 @@ const cardItems = [
             </Link>
           ))}
         </List>
+        <Divider />
+        <List sx={{
+          marginTop: `auto`,
+          '& .MuiTypography-root':{
+            color: '#FFFFFF'
+          }}} >
+          <ListItem>
+            <ListItemText>VegaPay Version 1.005</ListItemText>
+          </ListItem>
+        </List>
       </Drawer>
-      <Main open={isOpen}>
-          {props.children}
+      <Main className="main" open={isOpen}>
+        {props.children}
       </Main>
     </Box>
   );

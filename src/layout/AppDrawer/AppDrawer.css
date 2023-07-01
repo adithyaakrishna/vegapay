@@ -6,13 +6,21 @@
   color: #2e8b57;
 }
 
-.MuiTypography-root{
+.MuiTypography-root {
   color: black;
 }
-.logo{
+.logo {
   height: 50px;
 }
 
-.MuiAppBar-root{
+.MuiAppBar-root {
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1), 0px 4px 5px 0px rgba(0,0,0,0.01), 0px 0px 10px 0px rgba(0,0,0,0.1) !important;
+}
+
+.MuiSvgIcon-root.drawer-icon > path {
+  color: white;
+}
+
+.main{
+  width: 100% !important;
 }
